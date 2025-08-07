@@ -87,7 +87,7 @@ public:
  *    pair.first              // Would access the character (key)
  */
 
-class Solution {
+class Solution2 {
 public:
     bool isAnagram(string s, string t) {
         vector<int> count1(26), count2(26);
@@ -104,6 +104,30 @@ public:
         }
         for(int i = 0; i<26;i++){
             if (count1[i] != count2[i]){
+                return false;
+                break;
+            }
+        }
+        return true;
+    }
+};
+
+class Solution3 {
+public:
+    bool isAnagram(string s, string t) {
+        vector<int> count(26);
+
+        if(s.size() != t.size()){
+            return false;
+        }
+        
+        for(int i = 0; i < s.size(); i++){
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+
+        for(int i = 0; i<26;i++){
+            if (count[i] != 0){
                 return false;
                 break;
             }
