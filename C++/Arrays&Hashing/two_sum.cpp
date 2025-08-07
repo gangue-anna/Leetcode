@@ -32,7 +32,6 @@ public:
         return {};
     }
 };
-
 /*
  * Detailed C++ Syntax Explanation for Beginners:
  * 
@@ -69,3 +68,33 @@ public:
  *    return {umap[diff], i}  // Returns initializer list as vector
  *    return {};             // Returns empty vector
  */
+
+class Solution2 {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<pair<int, int>> valIndex;
+        for (int i = 0; i < nums.size(); i++){
+            valIndex.push_back({nums[i], i});
+        }
+
+        sort(valIndex.begin(), valIndex.end());
+
+        int start = 0;
+        int end = valIndex.size() - 1;
+        while(start < end){
+            int sum = valIndex[start].first + valIndex[end].first;
+            if(sum == target){
+                int i1 = min(valIndex[start].second, valIndex[end].second);
+                int i2 = max(valIndex[start].second, valIndex[end].second);
+                return {i1, i2};
+            }
+            else if(sum > target){
+                end--;
+            }
+            else{
+                start++;
+            }
+        }
+
+    }
+};
