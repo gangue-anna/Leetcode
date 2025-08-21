@@ -15,15 +15,18 @@ class Solution:
         Space Complexity: O(1)
             - Only two variables are used for state.
         """
-        one, two = 1, 1  # one = ways to reach i-1, two = ways to reach i-2
-
-        for i in range(n - 1):
-            temp = one
-            one = one + two  # Current ways = previous + one before previous
-            two = temp       # Update for next iteration
+        p, q = 1, 1 #0th Step = 1 way, 1st Step = 1 way
         
-        return one
-
+        if n == 0:
+            return p
+        if n == 1:
+            return q
+        
+        for i in range(n - 1):
+            temp = p
+            p = q
+            q = temp + q
+        return q
 
 def test_climb_stairs():
     solution = Solution()
