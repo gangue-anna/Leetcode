@@ -25,6 +25,32 @@ class Solution:
 # Time Complexity: O(n), where n is the number of houses (nums)
 # Space Complexity: O(1), since only a constant amount of space is used
 
+class Solution2:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        
+        if len(nums) == 2:
+            return max(nums[0], nums[1])
+
+        def rob_linear(houses):
+            n = len(houses)
+            dp = [0] * n
+            dp[0] = houses[0]
+            dp[1] = max(houses[0], houses[1])
+            
+            for i in range(2, n):
+                dp[i] = max(houses[i] + dp[i - 2], dp[i - 1])
+            
+            return dp[-1]
+
+        # Case 1: Exclude last house
+        rob1 = rob_linear(nums[:-1])
+        # Case 2: Exclude first house
+        rob2 = rob_linear(nums[1:])
+        
+        return max(rob1, rob2)
+
 # -------------------
 # Test Cases
 # -------------------
